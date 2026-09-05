@@ -33,14 +33,31 @@ in {
     # 5. Ripgrep (recherche textuelle ultra-rapide)
     programs.ripgrep.enable = true;
 
-    # 6. Fish Shell
+    # 6. Fish Shell & Plugins déclaratifs
     programs.fish = {
       enable = true;
+
+      plugins = [
+        { name = "z"; src = pkgs.fishPlugins.z.src; }
+        { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
+        { name = "colored-man-pages"; src = pkgs.fishPlugins.colored-man-pages.src; }
+      ];
+
       shellAliases = {
+        # Navigation & listes
+        ll = "eza -lh --git";
+        la = "eza -lah --git";
+        tree = "eza --tree";
+
+        # Remplaçants modernes
         cat = "bat";
         grep = "rg";
         find = "fd";
+
+        # Raccourcis fréquents
+        g = "git";
       };
+
       interactiveShellInit = ''
         # Initialisation automatique de Homebrew sur Apple Silicon si présent
         if test -d /opt/homebrew
