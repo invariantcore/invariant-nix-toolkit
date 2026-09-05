@@ -22,7 +22,7 @@ nix flake init -t github:invariantcore/invariant-nix-toolkit#host-linux
 ### 3. First-time Bootstrap (Initial Activation)
 Since the `home-manager` CLI is not yet in your `$PATH`, use `nix run` for the initial deployment:
 ```bash
-nix run github:nix-community/home-manager -- switch --flake .#<USERNAME> -b backup
+nix run github:nix-community/home-manager -- switch --flake .#<USERNAME>@<HOSTNAME> -b backup
 ```
 *(This activates your configuration and installs the `home-manager` and `task` CLIs directly into your profile.)*
 

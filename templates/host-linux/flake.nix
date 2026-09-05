@@ -15,7 +15,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, invariant, ... }: {
-    homeConfigurations."<USERNAME>" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."<USERNAME>@<HOSTNAME>" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
       modules = [
         # baseline.homeManagerModules.default

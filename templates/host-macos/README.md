@@ -23,9 +23,9 @@ nix flake init -t github:invariantcore/invariant-nix-toolkit#host-macos
 ### 3. First-time Bootstrap (Initial Activation)
 If `nix-darwin` is not yet installed in your system PATH, use `nix run`:
 ```bash
-nix run nix-darwin -- switch --flake .#<HOSTNAME>
+nix run nix-darwin -- switch --flake .#<USERNAME>@<HOSTNAME>
 ```
-*(Or if `nix-darwin` is already present: `sudo darwin-rebuild switch --flake .#<HOSTNAME>`)*
+*(Or if `nix-darwin` is already present: `sudo darwin-rebuild switch --flake .#<USERNAME>@<HOSTNAME>`)*
 
 ---
 

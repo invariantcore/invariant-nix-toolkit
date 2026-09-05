@@ -2,7 +2,7 @@ version: '3'
 
 vars:
   HOSTNAME:
-    sh: test "$(uname)" = "Darwin" && scutil --get LocalHostName || hostname -s
+    sh: hostname -s
   USER:
     sh: id -un
 
@@ -14,12 +14,9 @@ tasks:
 
   nx:switch:
     aliases: [nix:switch]
-    desc: "Apply declarative configuration on this machine"
+    desc: "Apply declarative user configuration (home-manager)"
     cmds:
-      - cmd: sudo darwin-rebuild switch --flake .#{{.HOSTNAME}}
-        platforms: [darwin]
-      - cmd: home-manager switch --flake .#{{.USER}}
-        platforms: [linux]
+      - home-manager switch --flake .#{{.USER}}@{{.HOSTNAME}}
 
   nx:update:
     aliases: [nix:update]

@@ -19,7 +19,7 @@
   };
 
   outputs = { self, nixpkgs, darwin, home-manager, baseline, invariant, ... }: {
-    darwinConfigurations."<HOSTNAME>" = darwin.lib.darwinSystem {
+    darwinConfigurations."<USERNAME>@<HOSTNAME>" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         baseline.darwinModules.default
