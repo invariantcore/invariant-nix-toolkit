@@ -11,14 +11,12 @@ git init
 nix flake init -t github:invariantcore/invariant-nix-toolkit#host-macos
 ```
 
-### 2. Configure `flake.nix`
-* Replace `<HOSTNAME>` with your machine's hostname (`scutil --get LocalHostName`).
-* Replace `<USERNAME>` with your macOS username (`id -un`).
-* Update `baseline.url` with your organization's baseline repository (or comment it out if standalone).
-* Stage your configuration:
-  ```bash
-  git add flake.nix Taskfile.yml
-  ```
+### 2. Auto-configure your host (`init` app)
+Run the local initialization app to automatically detect your macOS hostname and username, update `flake.nix`, and stage files in git:
+```bash
+nix run .#init
+```
+*(Optional: edit `baseline.url` in `flake.nix` if you are connecting an enterprise baseline).*
 
 ### 3. First-time Bootstrap (Initial Activation)
 If `nix-darwin` is not yet installed in your system PATH, use `nix run`:

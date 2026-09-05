@@ -14,9 +14,37 @@
     # baseline.url = "git+ssh://git@github.com/<ORG>/<REPO>.git";
   };
 
-  outputs = { self, nixpkgs, home-manager, invariant, ... }: {
+  outputs = { self, nixpkgs, home-manager, invariant, ... }:
+  let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    # 🛠️ App d'initialisation locale (zéro configuration manuelle)
+    apps.${system}.init = {
+      type = "app";
+      program = "${pkgs.writeShellScriptBin "init" ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        HOSTNAME=$(hostname -s)
+        USERNAME=$(id -un)
+
+        echo "🚀 Initializing Linux host configuration for $USERNAME@$HOSTNAME..."
+
+        ${pkgs.gnused}/bin/sed -i "s/<HOSTNAME>/$HOSTNAME/g" flake.nix
+        ${pkgs.gnused}/bin/sed -i "s/<USERNAME>/$USERNAME/g" flake.nix
+
+        git add flake.nix Taskfile.yml 2>/dev/null || true
+
+        echo "✅ Successfully configured flake.nix for $USERNAME@$HOSTNAME!"
+        echo ""
+        echo "Next step: Run the initial bootstrap:"
+        echo "  nix run github:nix-community/home-manager -- switch --flake .#$USERNAME@$HOSTNAME -b backup"
+      ''}/bin/init";
+    };
+
     homeConfigurations."<USERNAME>@<HOSTNAME>" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      inherit pkgs;
       modules = [
         # baseline.homeManagerModules.default
         invariant.homeManagerModules.default

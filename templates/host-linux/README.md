@@ -11,13 +11,11 @@ git init
 nix flake init -t github:invariantcore/invariant-nix-toolkit#host-linux
 ```
 
-### 2. Configure `flake.nix`
-* Replace `<USERNAME>` with your Linux username (`id -un`).
-* Adjust architecture if needed (`x86_64-linux` or `aarch64-linux`).
-* Stage your configuration:
-  ```bash
-  git add flake.nix Taskfile.yml
-  ```
+### 2. Auto-configure your host (`init` app)
+Run the local initialization app to automatically detect your Linux hostname and username, update `flake.nix`, and stage files in git:
+```bash
+nix run .#init
+```
 
 ### 3. First-time Bootstrap (Initial Activation)
 Since the `home-manager` CLI is not yet in your `$PATH`, use `nix run` for the initial deployment:
