@@ -24,6 +24,7 @@
           home.username = "<USERNAME>";
           home.homeDirectory = "/home/<USERNAME>";
           home.stateVersion = "24.05";
+          programs.home-manager.enable = true;
           invariant.enable = true;
         }
       ];
