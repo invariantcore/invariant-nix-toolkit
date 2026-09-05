@@ -4,8 +4,10 @@ This repository defines the corporate baseline for Linux developer workstations 
 
 ## 🛠️ Configuration
 
-- `modules/home-corporate.nix`: User-level corporate environment variables, proxy settings, and TLS certificates.
+* `modules/home/default.nix`: Aggregator module importing all corporate user-level modules.
+* `modules/home/security.nix`: Corporate TLS root CA certificates, proxy settings, and environment variables.
 
 ## 📦 Exported Modules
 
-- `homeManagerModules.corporate`: Corporate environment variables and proxy/certificate configurations.
+* `homeManagerModules.default`: Complete corporate user-level bundle.
+* `homeManagerModules.security`: Standalone corporate proxy and TLS root certificate configuration.

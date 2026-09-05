@@ -5,9 +5,11 @@ This repository defines the corporate baseline for macOS developer workstations.
 ## 🛠️ Configuration
 
 * `modules/darwin.nix`: Enterprise Homebrew Casks, system settings, and OS-level policies.
-* `modules/home-corporate.nix`: User-level environment variables, proxy configurations, and corporate certificates.
+* `modules/home/default.nix`: Aggregator module importing all corporate user-level modules.
+* `modules/home/security.nix`: Corporate TLS root CA certificates, proxy settings, and environment variables.
 
 ## 📦 Exported Modules
 
 * `darwinModules.default`: System-level macOS configuration.
-* `homeManagerModules.corporate`: User-level corporate environment variables.
+* `homeManagerModules.default`: Complete corporate user-level bundle.
+* `homeManagerModules.security`: Standalone corporate proxy and TLS root certificate configuration.

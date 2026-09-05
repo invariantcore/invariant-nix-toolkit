@@ -18,7 +18,7 @@
     homeConfigurations."<USERNAME>" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
       modules = [
-        # baseline.homeManagerModules.corporate
+        # baseline.homeManagerModules.default
         invariant.homeManagerModules.default
         {
           home.username = "<USERNAME>";

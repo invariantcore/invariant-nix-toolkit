@@ -4,6 +4,9 @@
   inputs = {};
 
   outputs = { self }: {
-    homeManagerModules.corporate = import ./modules/home-corporate.nix;
+    homeManagerModules = {
+      default  = import ./modules/home;
+      security = import ./modules/home/security.nix;
+    };
   };
 }

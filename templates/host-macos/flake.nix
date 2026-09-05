@@ -42,7 +42,7 @@
           home-manager.useUserPackages = true;
           home-manager.users."<USERNAME>" = {
             imports = [
-              baseline.homeManagerModules.corporate
+              baseline.homeManagerModules.default
               invariant.homeManagerModules.default
             ];
             home.username = "<USERNAME>";
