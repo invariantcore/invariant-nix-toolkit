@@ -4,7 +4,6 @@ let
   cfg = config.invariant.editors;
 in {
   imports = [
-    ./zed.nix
     ./fonts.nix
   ];
 
@@ -13,7 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    invariant.editors.zed.enable = mkDefault true;
     invariant.editors.fonts.enable = mkDefault true;
   };
 }

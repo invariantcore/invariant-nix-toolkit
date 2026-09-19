@@ -37,9 +37,8 @@ The toolkit is split into three orthogonal domains:
 - **GitOps:** `argocd`, `kustomize`.
 - **Automation & Inspection:** `devbox` (per-project IaC / compiler engine), `go-task` (`task`), `kcl`, `jq`, `yq-go`, `dust`, `coreutils`.
 
-### 3. `editors/` (Editing & Typography)
+### 3. `editors/` (Typography)
 
-- **Editor:** [Zed](https://zed.dev) (Pure Nix package, Linux & macOS).
 - **Typography:** [JetBrains Mono Nerd Font](https://www.nerdfonts.com/).
 
 ---
@@ -51,7 +50,7 @@ The toolkit is split into three orthogonal domains:
 | `invariant.enable`          | `false` | Master toggle: enables all domains (`core`, `platform`, `editors`). |
 | `invariant.core.enable`     | `false` | Enables shell, modern CLI, git, delta, and zellij.                  |
 | `invariant.platform.enable` | `false` | Enables Kubernetes, GitOps, and platform inspection tools.          |
-| `invariant.editors.enable`  | `false` | Enables Zed editor and JetBrains Mono Nerd Font.                    |
+| `invariant.editors.enable`  | `false` | Enables JetBrains Mono Nerd Font.                                   |
 
 ---
 
