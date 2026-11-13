@@ -32,11 +32,16 @@
 
         HOSTNAME=$(scutil --get LocalHostName)
         USERNAME=$(id -un)
+        read -r -p "Git User Name [Fabien Lassagne]: " GIT_NAME
+        GIT_NAME=''${GIT_NAME:-Fabien Lassagne}
+        read -r -p "Git User Email: " GIT_EMAIL
 
         echo "🚀 Initializing macOS host configuration for $USERNAME@$HOSTNAME..."
 
         ${pkgs.gnused}/bin/sed -i "s/<HOSTNAME>/$HOSTNAME/g" flake.nix
         ${pkgs.gnused}/bin/sed -i "s/<USERNAME>/$USERNAME/g" flake.nix
+        ${pkgs.gnused}/bin/sed -i "s/<GIT_NAME>/$GIT_NAME/g" flake.nix
+        ${pkgs.gnused}/bin/sed -i "s/<GIT_EMAIL>/$GIT_EMAIL/g" flake.nix
 
         git add flake.nix Taskfile.yml 2>/dev/null || true
 
@@ -63,6 +68,18 @@
             home = "/Users/<USERNAME>";
             shell = pkgs.fish;
           };
+
+          # Workstation macOS GUI tools (Display & Window Management)
+          homebrew = {
+            enable = true;
+            taps = [
+              "nikitabobko/tap"
+            ];
+            casks = [
+              "betterdisplay"
+              "nikitabobko/tap/aerospace"
+            ];
+          };
         }
         home-manager.darwinModules.home-manager
         {
@@ -77,6 +94,11 @@
             home.homeDirectory = "/Users/<USERNAME>";
             home.stateVersion = "24.05";
             invariant.enable = true;
+
+            programs.git = {
+              userName = "<GIT_NAME>";
+              userEmail = "<GIT_EMAIL>";
+            };
           };
         }
       ];

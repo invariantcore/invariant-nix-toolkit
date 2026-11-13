@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.invariant.core.git;
@@ -8,6 +8,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.tig ];
+
     programs.git = {
       enable = true;
 

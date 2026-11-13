@@ -28,11 +28,16 @@
 
         HOSTNAME=$(hostname -s)
         USERNAME=$(id -un)
+        read -r -p "Git User Name [Fabien Lassagne]: " GIT_NAME
+        GIT_NAME=''${GIT_NAME:-Fabien Lassagne}
+        read -r -p "Git User Email: " GIT_EMAIL
 
         echo "🚀 Initializing Linux host configuration for $USERNAME@$HOSTNAME..."
 
         ${pkgs.gnused}/bin/sed -i "s/<HOSTNAME>/$HOSTNAME/g" flake.nix
         ${pkgs.gnused}/bin/sed -i "s/<USERNAME>/$USERNAME/g" flake.nix
+        ${pkgs.gnused}/bin/sed -i "s/<GIT_NAME>/$GIT_NAME/g" flake.nix
+        ${pkgs.gnused}/bin/sed -i "s/<GIT_EMAIL>/$GIT_EMAIL/g" flake.nix
 
         git add flake.nix Taskfile.yml 2>/dev/null || true
 
@@ -54,6 +59,11 @@
           home.stateVersion = "24.05";
           programs.home-manager.enable = true;
           invariant.enable = true;
+
+          programs.git = {
+            userName = "<GIT_NAME>";
+            userEmail = "<GIT_EMAIL>";
+          };
         }
       ];
     };
